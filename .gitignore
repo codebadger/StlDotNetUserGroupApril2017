@@ -1,0 +1,13 @@
+*.csproj.user
+
+services/.vs/
+
+api/sql-connection.json
+
+**/bin/
+**/obj/
+
+web/node_modules
+
+project.lock.json
+GoldenBoot.nuget.props
