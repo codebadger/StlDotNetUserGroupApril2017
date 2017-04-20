@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using GoldenBoot.Api.Models;
+using Newtonsoft.Json;
 
 namespace GoldenBoot.Api
 {
@@ -28,7 +30,12 @@ namespace GoldenBoot.Api
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddMvc();
+            services.AddMvc().AddJsonOptions(
+                x => x.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            );
+
+            // GoldenBoot DI
+            services.AddTransient<ICompetitionRepository, CompetitionSqlRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,6 +43,8 @@ namespace GoldenBoot.Api
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            app.UseDeveloperExceptionPage();
 
             app.UseMvc();
         }
