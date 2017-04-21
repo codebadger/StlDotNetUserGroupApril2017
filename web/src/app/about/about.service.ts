@@ -12,7 +12,7 @@ export class AboutService {
 
     getAbout(): Observable<About> {
 
-        const results = this.http.get('http://localhost:1979/api/about')
+        const results = this.http.get('http://localhost:32768/api/about')
             .map(this.extractData)
             .catch(this.handleError);
 
