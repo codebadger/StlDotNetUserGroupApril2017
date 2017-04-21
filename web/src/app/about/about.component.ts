@@ -1,21 +1,31 @@
 import { Component, OnInit } from '@angular/core';
+import { RouterModule, Routes, ActivatedRoute } from '@angular/router';
 
-import { About} from './about';
+import { AboutService } from './about.service';
+import { About } from './about';
 
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
-  styleUrls: ['./about.component.css']
+  styleUrls: ['./about.component.css'],
+  providers: [AboutService]
 })
 export class AboutComponent implements OnInit {
 
-  about: About;
+    error: string;
+    about: About;
 
-    constructor() {
+    constructor(private service: AboutService, private route: ActivatedRoute) {
         this.about = new About('1', '2', '3');
     }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+
+        this.service.getAbout().subscribe(
+            x => this.about = x,
+            error => this.error = <any>error
+        );
+
+    }
 
 }
