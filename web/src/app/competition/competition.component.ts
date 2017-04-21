@@ -21,13 +21,18 @@ export class CompetitionComponent implements OnInit {
 
     ngOnInit() {
 
-        let id = '';
-        if (!id) { id = 'copa-2016'; };
+        this.route.params
+            .map(x => x['id'])
+            .subscribe((id) => {
 
-        this.service.getCompetition(id).subscribe(
-            x => this.competition = x,
-            error => this.error = <any>error
-        );
+                if (!id) { id = 'copa-2016'; };
+
+                this.service.getCompetition(id).subscribe(
+                    x => this.competition = x,
+                    error => this.error = <any>error
+                );
+
+        });
 
     }
 

@@ -9,8 +9,10 @@ import { AboutComponent } from './about/about.component';
 import { CompetitionComponent } from './competition/competition.component';
 
 const appRoutes: Routes = [
+  { path: '', component: CompetitionComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'competition', component: CompetitionComponent }
+  { path: 'competition', component: CompetitionComponent },
+  { path: 'competition/:id', component: CompetitionComponent }
 ];
 
 @NgModule({
